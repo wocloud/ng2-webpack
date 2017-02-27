@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { ThemeConfig } from './theme.config';
 import { ThemeConfigProvider } from './theme.config.provider';
+import { MenuService } from './services/index';
 
 import {
     HeaderComponent,
@@ -33,7 +34,8 @@ export class ThemeModule {
             ngModule: ThemeModule,
             providers: [
                 ThemeConfig,
-                ThemeConfigProvider
+                ThemeConfigProvider,
+                MenuService
             ]
         };
     }

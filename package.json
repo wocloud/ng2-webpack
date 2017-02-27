@@ -57,12 +57,19 @@
     "@angular/router": "^3.4.8",
     "@angularclass/hmr": "^1.2.2",
     "@angularclass/hmr-loader": "^3.0.2",
-    "bootstrap": "^3.3.7",
     "codelyzer": "^2.0.1",
     "core-js": "^2.4.1",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "rxjs": "^5.2.0",
     "zone.js": "^0.7.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wocloud/ng2-webpack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wocloud/ng2-webpack/issues"
+  },
+  "homepage": "https://github.com/wocloud/ng2-webpack#readme"
 }
