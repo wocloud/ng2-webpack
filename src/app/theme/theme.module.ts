@@ -8,11 +8,15 @@ import { MenuService } from './services/index';
 
 import {
     HeaderComponent,
+    AsideComponent,
+    MenuItemComponent,
     MenuComponent
 } from './components/index';
 
 const THEME_COMPONENTS = [
     HeaderComponent,
+    AsideComponent,
+    MenuItemComponent,
     MenuComponent
 ];
 

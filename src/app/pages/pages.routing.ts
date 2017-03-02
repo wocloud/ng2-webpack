@@ -4,11 +4,11 @@ import { PagesComponent } from './pages.component';
 
 export const routes: Routes = [
     {
-        path: 'pages',
+        path: '',
         component: PagesComponent,
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule' },
+            { path: 'dashboards', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule' },
             { path: 'apps', loadChildren: 'app/pages/apps/apps.module#AppsModule' }
         ]
     }

@@ -15,6 +15,7 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/mergeMap");
 // Web dependencies
 require("jquery");
+//import 'bootstrap';
 //import 'bootstrap-loader';
 //import 'font-awesome-sass-loader';
 require("lodash");

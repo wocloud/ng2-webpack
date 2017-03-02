@@ -10,26 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var global_state_1 = require("../../global.state");
-var theme_config_1 = require("../theme.config");
+var global_state_1 = require("../../../global.state");
+var theme_config_1 = require("../../theme.config");
 /*
  * Header Component
  */
 var HeaderComponent = (function () {
     function HeaderComponent(_state, _config) {
-        //this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
-        //    this.isMenuCollapsed = isCollapsed;
-        //});
+        var _this = this;
         this._state = _state;
         this._config = _config;
         this.app = {};
         this.isScrolled = false;
         this.isMenuCollapsed = false;
+        this._state.subscribe('menu.isCollapsed', function (isCollapsed) {
+            _this.isMenuCollapsed = isCollapsed;
+        });
         this.app = this._config.app;
+        this.isMenuCollapsed = this.app.settings.asideFixed;
     }
     HeaderComponent.prototype.asideFoldedChanged = function () {
-        this.app.settings.asideFolded = !this.app.settings.asideFolded;
-        this._state.notifyDataChanged('app.settings.asideFolded', this.app.settings.asideFolded);
+        this.isMenuCollapsed = !this.isMenuCollapsed;
+        this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
         return false;
     };
     HeaderComponent.prototype.scrolledChanged = function (isScrolled) {
@@ -39,7 +41,7 @@ var HeaderComponent = (function () {
 }());
 HeaderComponent = __decorate([
     core_1.Component({
-        selector: 'my-header',
+        selector: 'sf-header',
         templateUrl: './header.html'
     }),
     __metadata("design:paramtypes", [global_state_1.GlobalState, theme_config_1.ThemeConfig])

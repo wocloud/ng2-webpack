@@ -19,7 +19,7 @@ var PagesComponent = (function () {
 }());
 PagesComponent = __decorate([
     core_1.Component({
-        selector: 'my-pages',
+        selector: 'sf-pages',
         styles: [],
         template: "\n    <div class=\"app-content\">\n      <router-outlet></router-outlet>\n    </div>\n    "
     }),

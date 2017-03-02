@@ -1,0 +1,36 @@
+<li *ngIf="!menuItem.hidden" [title]="menuItem.title">
+    <!-- menu -->
+    <a class="auto" *ngIf="!menuItem.children && !menuItem.url"
+       (mouseenter)="onHoverMenuItem($event, item)"
+       [routerLink]="menuItem.route.paths">
+        <i class="fa text-primary-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
+        <span class="font-bold">{{ menuItem.title }}</span>
+    </a>
+
+    <a class="auto" *ngIf="!menuItem.children && menuItem.url"
+       (mouseenter)="onHoverMenuItem($event, item)"
+       [href]="menuItem.url" [target]="menuItem.target">
+        <i class="fa text-primary-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
+        <span class="font-bold">{{ menuItem.title }}</span>
+    </a>
+
+    <a class="auto" *ngIf="menuItem.children" href
+       (mouseenter)="onHoverMenuItem($event, item)"
+       (click)="onToggleSubMenu($event, menuItem)">
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right" [ngClass]="{'fa-angle-down': menuItem.selected}"></i>
+        </span>
+        <i class="fa text-primary-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
+        <span class="font-bold">{{ menuItem.title }}</span>
+    </a>
+
+    <!--- sub menu ---->
+    <ul class="nav nav-sub dk" *ngIf="menuItem.children" ngClass="{'active': menuItem.selected}">
+        <sf-menu-item [menuItem]="subItem"
+                      [child]="true"
+                      (menuItemHover)="onHoverMenuItem($event)"
+                      (toggleSubMenu)="onToggleSubMenu($event, subItem)"
+                      *ngFor="let subItem of menuItem.children">
+        </sf-menu-item>
+    </ul>
+</li>

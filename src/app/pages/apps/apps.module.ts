@@ -11,7 +11,6 @@ import {WeatherComponent} from "./weather/weather.component";
 import {AppsComponent} from './apps.component';
 
 import { routing } from './apps.routing';
-import {ContactComponent} from "./contact/contact.component";
 
 @NgModule({
     imports: [

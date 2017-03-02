@@ -77,11 +77,12 @@ export class MenuService {
 
     protected _convertObjectToItem(object, parent?:any):any {
         let item:any = {};
-        if (object.data && object.data.menu) {
+
+        if (object.data) {
             // this is a menu object
-            item = object.data.menu;
+            item = object.data;
             item.route = object;
-            delete item.route.data.menu;
+            delete item.route.data;
         } else {
             item.route = object;
             item.skip = true;

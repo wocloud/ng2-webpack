@@ -1,26 +1,39 @@
 export const PAGES_MENU = [
     {
-        path: 'dashboard',
-        title: 'Dashboard',
-        icon: 'fa-home',
-        data: [
+        path: 'dashboards',
+        data: {
+            title: 'Dashboard',
+            icon: 'fa-home',
+        },
+        children: [
             {
-                title: 'Dashboard',
-                icon: 'fa-home'
+                path: 'dashboard',
+                data: {
+                    title: 'Dashboard',
+                    icon: 'fa-home',
+                }
             }
         ]
     },
     {
-        path: 'Apps',
-        title: 'apps',
-        icon: 'fa-user',
-        data: [
+        path: 'apps',
+        data: {
+            title: 'Apps',
+            icon: 'fa-user',
+        },
+        children: [
             {
-                title: 'Contacts',
-                icon: 'fa-book'
+                path: 'contact',
+                data: {
+                    title: 'Contacts',
+                    icon: 'fa-book'
+                }
             }, {
-                title: 'Weather',
-                icon: 'fa-cog'
+                path: 'weather',
+                data: {
+                    title: 'Weather',
+                    icon: 'fa-cog'
+                }
             }
         ]
     }

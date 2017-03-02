@@ -1,0 +1,7 @@
+<ul class="nav">
+    <sf-menu-item
+            [menuItem]="item"
+            (menuItemHover)="hoverMenuItem($event)"
+            (toggleSubMenu)="toggleSubMenu($event)"
+            *ngFor="let item of menuItems"></sf-menu-item>
+</ul>

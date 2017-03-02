@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 
 
 @Component({
-    selector: 'my-pages',
+    selector: 'sf-pages',
     styles: [],
     template: `
     <div class="app-content">
