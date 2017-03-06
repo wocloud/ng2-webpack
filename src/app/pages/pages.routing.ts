@@ -7,7 +7,7 @@ export const routes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: '', redirectTo: 'dashboards', pathMatch: 'full' },
             { path: 'dashboards', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule' },
             { path: 'apps', loadChildren: 'app/pages/apps/apps.module#AppsModule' }
         ]

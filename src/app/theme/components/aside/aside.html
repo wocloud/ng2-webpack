@@ -1,4 +1,10 @@
-<aside [ngClass]="app.settings.asideColor">
-    <sf-menu [sidebarCollapsed]="isMenuCollapsed"
-             (expandMenu)="menuExpand()"></sf-menu>
+<aside class="navi"
+       [ngClass]="app.settings.asideColor"
+       (mouseover)="menuExpand()"
+       (mouseout)="menuCollapse()">
+    <div class="nav-sub-header" [ngClass]="app.settings.navbarHeaderColor">
+        Navigation Title
+    </div>
+    <sf-menu [sidebarCollapsed]="isMenuCollapsed" (expandMenu)="menuExpand()"></sf-menu>
+    <div class="clearfix"></div>
 </aside>

@@ -29,7 +29,6 @@ const METADATA = {
     baseUrl: '/',
     isDevServer: helpers.isWebpackDevServer()
 };
-const rootDir = path.resolve(__dirname, '..');
 
 /*
  * Webpack configuration
@@ -64,7 +63,7 @@ module.exports = function (options) {
              *
              * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
              */
-            extensions: ['.ts', '.js', '.json'],
+            extensions: ['.ts', '.js', 'css', 'less'],
 
             // An array of directory names to be resolved to the current directory
             modules: [helpers.root('src'), helpers.root('node_modules')]
@@ -124,23 +123,16 @@ module.exports = function (options) {
                 },
 
                 /*
-                 * Json loader support for *.json files.
-                 *
-                 * See: https://github.com/webpack/json-loader
-                 */
-                {
-                    test: /\.json$/,
-                    use: 'json-loader'
-                },
-
-                /*
                  * to string and css loader support for *.css files (from Angular components)
                  * Returns file content as string
                  *
                  */
                 {
                     test: /\.css$/,
-                    use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: 'css-loader'
+                    })
                 },
 
                 /*
@@ -150,7 +142,10 @@ module.exports = function (options) {
                  */
                 {
                     test: /\.less$/,
-                    use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'less', 'less-loader'] })
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: ['css-loader', 'less', 'less-loader']
+                    })
                 },
 
                 /* Raw loader support for *.html
@@ -195,13 +190,13 @@ module.exports = function (options) {
          * See: http://webpack.github.io/docs/configuration.html#plugins
          */
         plugins: [
-            new ExtractTextPlugin({filename: 'app.css', allChunks: true}),
-
             new AssetsPlugin({
                 path: helpers.root('dist'),
                 filename: 'webpack-assets.json',
                 prettyPrint: true
             }),
+
+            new ExtractTextPlugin('vendor.css'),
 
             new CheckerPlugin(),
             /*

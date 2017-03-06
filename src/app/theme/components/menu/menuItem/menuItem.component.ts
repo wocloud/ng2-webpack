@@ -10,13 +10,13 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 export class MenuItemComponent {
     @Input() menuItem:any;
-    @Input() child:boolean = false;
+    @Input() child: boolean = false;
 
-    @Output() menuItemHover = new EventEmitter<any>();
+    @Output() hoverMenuItem = new EventEmitter<any>();
     @Output() toggleSubMenu = new EventEmitter<any>();
 
     public onHoverMenuItem($event):void {
-        this.menuItemHover.emit($event);
+        this.hoverMenuItem.emit($event);
     }
 
     public onToggleSubMenu($event, item):boolean {

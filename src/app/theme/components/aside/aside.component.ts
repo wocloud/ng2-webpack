@@ -12,7 +12,7 @@ import { GlobalState } from '../../../global.state';
 export class AsideComponent {
 
     private app:any = {};
-    private isMenuCollapsed: boolean = false;
+    private isMenuCollapsed: boolean = false; //default is open.
 
     constructor(private _config: ThemeConfig,
                 private _state:GlobalState) {
@@ -25,14 +25,15 @@ export class AsideComponent {
     }
 
     public menuExpand():void {
-        this.menuCollapseStateChange(false);
-    }
-
-    public menuCollapse():void {
         this.menuCollapseStateChange(true);
     }
 
+    public menuCollapse():void {
+        this.menuCollapseStateChange(false);
+    }
+
     public menuCollapseStateChange(isCollapsed:boolean):void {
+        //console.log('menuCollapseStateChange(still not add styles, just function): ' + isCollapsed);
         this.isMenuCollapsed = isCollapsed;
         this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
     }

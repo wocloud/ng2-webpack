@@ -18,7 +18,6 @@ export class MenuComponent implements OnInit{
     @Output() expandMenu = new EventEmitter<any>();
 
     public menuItems: any[];
-    public showHoverElem: boolean;
     protected _menuItemsSub: Subscription;      //menu item subscription
     protected _onRouteChange: Subscription;     //resource object
 
@@ -87,19 +86,7 @@ export class MenuComponent implements OnInit{
      * @param $event
      * @returns {boolean}
      */
-    public toggleSubMenu($event): boolean {
-        let submenu = jQuery($event.currentTarget).next();
-
-        if (this.sidebarCollapsed) {
-            this.expandMenu.emit(null);
-            if (!$event.item.expanded) {
-                $event.item.expanded = true;
-            }
-        } else {
-            $event.item.expanded = !$event.item.expanded;
-            submenu.slideToggle();
-        }
-
-        return false;
+    public toggleSubMenu($event): void {
+        this._service.expandHoveredItem($event.item);
     }
 }

@@ -124,4 +124,14 @@ export class MenuService {
         object.selected = this._router.isActive(this._router.createUrlTree(object.route.paths), object.pathMatch === 'full');
         return object;
     }
+
+    protected expandHoveredItem(hoverItem):void {
+        this.menuItems._value.forEach((item) => {
+            if (item!=hoverItem) {
+                item.expanded = false;
+            } else {
+                item.expanded = true;
+            }
+        });
+    }
 }

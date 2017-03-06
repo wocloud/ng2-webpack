@@ -10,9 +10,9 @@
   .app-aside-folded li:focus &,
   .app-aside-folded li:active &{
   	opacity: 1;
-		margin-left: 0;
-		height: auto !important;
-		overflow: auto;
+	margin-left: 0;
+	height: auto !important;
+	overflow: auto;
   }
 }
 
@@ -24,16 +24,17 @@
 }
 
 .navi {
-	ul.nav {
-		li {
+	height: 100%;
+	.nav {
+		.menu-list {
 			display: block;
 			position: relative;
 			li {
 				a {
-					padding-left: @app-aside-nav-height + 15px;
+					padding-left: @app-aside-nav-height + 15px!important;
 				}
 			}
-			a {
+			a, .menu-list-title {
 				font-weight: normal;
 				text-transform: none;
 				display: block;
@@ -74,9 +75,10 @@
 			}
 		}
 		.navi{
-			> ul {
-				> li {
-					> a {
+			height: 100%;
+			> .nav {
+				> .menu-list {
+					> a, .menu-list-title {
 						position: relative;
 						padding: 0;
 						text-align: center;
@@ -130,7 +132,7 @@
 	}
 
 	.app-aside-folded.app-aside-fixed .app-aside{
-		> ul.nav {
+		 .nav {
 			&:before{
 				content:"";
 				width: @app-aside-folded-width;

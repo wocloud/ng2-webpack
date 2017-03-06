@@ -11,9 +11,7 @@ import { MENU } from './app.menu';
     selector: 'sf-app',
     template: `
     <div class="app">
-        <div class="app-header navbar">
-            <sf-header></sf-header>
-        </div>
+        <sf-header class="app-header navbar"></sf-header>
         <div class="app-aside">
             <sf-sidebar></sf-sidebar>
         </div>
