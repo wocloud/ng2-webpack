@@ -154,7 +154,7 @@ module.exports = function (options) {
                             path: 'zone.js/dist/long-stack-trace-zone.js'
                         }
                     ],
-                    vendor: [
+                    angular: [
                         '@angular/platform-browser',
                         '@angular/platform-browser-dynamic',
                         '@angular/core',
@@ -162,7 +162,9 @@ module.exports = function (options) {
                         '@angular/forms',
                         '@angular/http',
                         '@angular/router',
-                        '@angularclass/hmr',
+                        '@angularclass/hmr'
+                    ],
+                    vendor: [
                         'rxjs'
                     ]
                 },
@@ -183,6 +185,7 @@ module.exports = function (options) {
              */
             new AddAssetHtmlPlugin([
                 { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
+                { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('angular')}`) },
                 { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
             ]),
 
@@ -194,7 +197,15 @@ module.exports = function (options) {
             new LoaderOptionsPlugin({
                 debug: true,
                 options: {
-
+                    context: helpers.root('src'),
+                    output: {
+                        path: helpers.root('dist')
+                    },
+                    tslint: {
+                        emitErrors: false,
+                        failOnHint: false,
+                        resourcePath: 'src'
+                    }
                 }
             })
         ],

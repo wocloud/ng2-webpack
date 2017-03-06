@@ -14,7 +14,7 @@ import { MENU } from './app.menu';
         <div class="app-header navbar">
             <sf-header></sf-header>
         </div>
-        <div class="app-aside hidden-xs">
+        <div class="app-aside">
             <sf-sidebar></sf-sidebar>
         </div>
         <div class="app-content">

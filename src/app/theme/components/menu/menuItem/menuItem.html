@@ -25,7 +25,7 @@
     </a>
 
     <!--- sub menu ---->
-    <ul class="nav nav-sub dk" *ngIf="menuItem.children" ngClass="{'active': menuItem.selected}">
+    <ul class="nav dk" *ngIf="menuItem.children" ngClass="{'active': menuItem.selected}">
         <sf-menu-item [menuItem]="subItem"
                       [child]="true"
                       (menuItemHover)="onHoverMenuItem($event)"

@@ -13,6 +13,8 @@ const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplaceme
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
@@ -21,7 +23,6 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 /*
  * Webpack Constants
  */
-const HMR = helpers.hasProcessFlag('hot');
 const AOT = helpers.hasNpmFlag('aot');
 const METADATA = {
     title: 'Angular2 Webpack by sophia.wang from SkyForm',
@@ -48,7 +49,7 @@ module.exports = function (options) {
         entry: {
             'vendor':    './src/vendor.ts',
             'polyfills': './src/polyfills.ts',
-            'main':      './src/main.ts'
+            'main':      AOT ? './src/main.aot.ts' : './src/main.ts'
         },
 
         /*
@@ -139,8 +140,7 @@ module.exports = function (options) {
                  */
                 {
                     test: /\.css$/,
-                    use: ['to-string-loader', 'css-loader'],
-                    exclude: [helpers.root('src', 'styles')]
+                    use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
                 },
 
                 /*
@@ -149,9 +149,8 @@ module.exports = function (options) {
                  *
                  */
                 {
-                    test: /\.scss$/,
-                    use: ['to-string-loader', 'css-loader', 'sass-loader'],
-                    exclude: [helpers.root('src', 'styles')]
+                    test: /\.less$/,
+                    use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'less', 'less-loader'] })
                 },
 
                 /* Raw loader support for *.html
@@ -173,12 +172,16 @@ module.exports = function (options) {
                     use: 'file-loader'
                 },
 
-                /* File loader for supporting fonts, for example, in CSS files.
-                 */
                 {
-                    test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+                    test: /\.woff(2)?(\?v=.+)?$/,
+                    use: 'url-loader?limit=10000&mimetype=application/font-woff'
+                },
+
+                {
+                    test: /\.(ttf|eot|svg)(\?v=.+)?$/,
                     use: 'file-loader'
                 },
+
                 {
                     test: /bootstrap\/dist\/js\/umd\//,
                     use: 'imports-loader?jQuery=jquery'
@@ -192,6 +195,14 @@ module.exports = function (options) {
          * See: http://webpack.github.io/docs/configuration.html#plugins
          */
         plugins: [
+            new ExtractTextPlugin({filename: 'app.css', allChunks: true}),
+
+            new AssetsPlugin({
+                path: helpers.root('dist'),
+                filename: 'webpack-assets.json',
+                prettyPrint: true
+            }),
+
             new CheckerPlugin(),
             /*
              * Plugin: CommonsChunkPlugin
@@ -201,19 +212,10 @@ module.exports = function (options) {
              * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
              * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
              */
-            new CommonsChunkPlugin({
-                name: 'polyfills',
-                chunks: ['polyfills']
-            }),
-            // This enables tree shaking of the vendor modules
-            new CommonsChunkPlugin({
-                name: 'vendor',
-                chunks: ['main'],
-                minChunks: module => /node_modules/.test(module.resource)
-            }),
             // Specify the correct order the scripts will be injected in
             new CommonsChunkPlugin({
-                name: ['polyfills', 'vendor'].reverse()
+                name: ['polyfills', 'vendor', 'angular'].reverse(),
+                minChunks: module => /node_modules/.test(module.resource)
             }),
             /**
              * Plugin: ContextReplacementPlugin
