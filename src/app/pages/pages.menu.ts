@@ -4,16 +4,7 @@ export const PAGES_MENU = [
         data: {
             title: 'Dashboard',
             icon: 'fa-home',
-        },
-        children: [
-            {
-                path: 'dashboard',
-                data: {
-                    title: 'Dashboard',
-                    icon: 'fa-home',
-                }
-            }
-        ]
+        }
     },
     {
         path: 'apps',

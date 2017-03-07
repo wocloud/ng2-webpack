@@ -10,14 +10,16 @@ import {
     HeaderComponent,
     AsideComponent,
     MenuItemComponent,
-    MenuComponent
+    MenuComponent,
+    FooterComponent
 } from './components/index';
 
 const THEME_COMPONENTS = [
     HeaderComponent,
     AsideComponent,
     MenuItemComponent,
-    MenuComponent
+    MenuComponent,
+    FooterComponent
 ];
 
 @NgModule({

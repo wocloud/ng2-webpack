@@ -11,15 +11,16 @@ import { MENU } from './app.menu';
     selector: 'sf-app',
     template: `
     <div class="app">
-        <sf-header class="app-header navbar"></sf-header>
         <div class="app-aside">
             <sf-sidebar></sf-sidebar>
         </div>
         <div class="app-content">
+            <sf-header></sf-header>
             <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
-            <div class="app-content-body fade-in-up">
-                <sf-pages></sf-pages>
+            <div class="app-content-body app-full-height fade-in-up">
+                <router-outlet></router-outlet>
             </div>
+            <sf-footer></sf-footer>
         </div>
     </div>
   `,

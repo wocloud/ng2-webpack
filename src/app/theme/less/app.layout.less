@@ -26,6 +26,8 @@ body{
 		display: block;
 	}
 }
+.app-full-height {height: 100%!important;}
+.app-full-width {width: 100%!important;}
 
 .app-header-fixed{
 	padding-top: @app-header-height;
@@ -79,6 +81,7 @@ body{
 .app-content{
 	height: 100%;
 	.clearfix();
+	overflow-x:scroll;
 }
 
 .app-content-full{
@@ -96,10 +99,22 @@ body{
 	}	
 }
 
-.app-content-body{
-	padding-bottom: @app-header-height;
+.app-content-header,
+.app-content-body,
+.app-content-footer{
 	float: left;
 	width: 100%;
+}
+.app-content-header{
+	top: 0;
+}
+.app-content-body{
+	padding-bottom: @app-header-height;
+}
+.app-content-footer{
+	position: absolute;
+	left: 0;
+	bottom: 0px;
 }
 
 // footer
@@ -113,6 +128,8 @@ body{
 		position: fixed;
 	}
 }
+
+.h-center{text-align: center !important;}
 
 .hbox{
 	display: table;
@@ -226,7 +243,6 @@ body{
 	.navbar-header {
 		width: @app-aside-width;
 	}
-	.navbar-collapse,
 	.app-content,
 	.app-footer{
 		margin-left: @app-aside-width;
@@ -266,7 +282,6 @@ body{
 		.navbar-header {
 			width: @app-aside-folded-width;
 		}
-		.navbar-collapse,
 		.app-content,
 		.app-footer{
 			margin-left: @app-aside-folded-width;
