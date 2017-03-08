@@ -11,12 +11,15 @@ import {WeatherComponent} from "./weather/weather.component";
 import {AppsComponent} from './apps.component';
 
 import { routing } from './apps.routing';
+import {SFTableModule} from "../../components/table/sf.table.module";
+//import { PaginationModule } from 'ng2-bootstrap/pagination';
 
 @NgModule({
     imports: [
         CommonModule,
         ThemeModule,
-        routing
+        routing,
+        SFTableModule
     ],
     declarations: [
         ContactComponent,
