@@ -3119,6 +3119,13 @@ a.text-black:hover {
 .text-muted {
   color: #98a6ad;
 }
+.breadcrumb li a {
+  color: #428bca;
+}
+.breadcrumb li.active a {
+  color: #363f44;
+  pointer-events: none;
+}
 .pos-rlt {
   position: relative;
 }

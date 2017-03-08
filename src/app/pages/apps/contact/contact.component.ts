@@ -10,6 +10,14 @@ import { TableData } from './table.data';
 })
 
 export class ContactComponent{
+    ////////////////breadcrumb/////////////////////
+    public items:Array<any> = [
+        {name: 'Home', href: 'dashboards'},
+        {name: 'Contact', href: 'apps/contact'},
+        {name: 'Breadcrumb', href: 'apps/contact', active: true}
+    ];
+
+    ////////////////table/////////////////////
     public rows:Array<any> = TableData;
     public columns:Array<any> = [
         {title: 'Name', name: 'name'},
@@ -19,12 +27,6 @@ export class ContactComponent{
         {title: 'Start date', className: 'text-warning', name: 'startDate'},
         {title: 'Salary ($)', name: 'salary'}
     ];
-    //public numPages:number = 1;     //total number of the pages
-    //public totalItems:number = 0;   // total number of the items after filtering (of it's chosen)
-    //public pageSize:number = 5;     // number of data in each page
-    //public itemsPerPage = 5;        //number of the displaying items (rows) on a page
-    //public maxSize = 3;         //number of the displaying pages before ...
-    //public currentPage:number = 1;      //the default page after the table component loading
     //config for setup all plugins (filtering, sorting, paging)
     public config:any = {
         paging: {

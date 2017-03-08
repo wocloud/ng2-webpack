@@ -10,4 +10,7 @@ To run the project on browser, run the following command:
 
 then, open your browser, and typing the following path:
 
-http://localhost:8080
+http://localhost:8000
+
+
+PS: ng2-bootstrap website: http://valor-software.com/ng2-bootstrap/

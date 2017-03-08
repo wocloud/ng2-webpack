@@ -12,14 +12,15 @@ import {AppsComponent} from './apps.component';
 
 import { routing } from './apps.routing';
 import {SFTableModule} from "../../components/table/sf.table.module";
-//import { PaginationModule } from 'ng2-bootstrap/pagination';
+import {SFBreadcrumbModule} from "../../components/breadcrumb/sf.breadcrumb.module";
 
 @NgModule({
     imports: [
         CommonModule,
         ThemeModule,
         routing,
-        SFTableModule
+        SFTableModule,
+        SFBreadcrumbModule
     ],
     declarations: [
         ContactComponent,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AlertModule } from 'ng2-bootstrap/alert';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -26,6 +27,7 @@ const APP_PROVIDERS = [
         BrowserModule,
         FormsModule,
         HttpModule,
+        AlertModule.forRoot(),
         ThemeModule.forRoot(),
         routing,
         PagesModule

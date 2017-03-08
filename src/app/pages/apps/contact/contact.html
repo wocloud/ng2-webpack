@@ -1,6 +1,10 @@
 <h1>Contact</h1>
 
-<h2>Test/Demo Table Component--SF-TABLE</h2>
+<h2>Test/Demo Breadcrumb Component--sf-breadcrumb</h2>
+<span class="line-dashed"></span>
+<sf-breadcrumb [items]="items"></sf-breadcrumb>
+
+<h2>Test/Demo Table Component--sf-table</h2>
 <span class="line-dashed"></span>
 <sf-table [rows]="rows" [columns]="columns" [config]="config" (rowClicked)="rowClicked($event)"></sf-table>
 <pre *ngIf="config.paging.flag" class="card card-block card-header">Page: {{config.paging.currentPage}} / {{config.paging.numPages}}</pre>
