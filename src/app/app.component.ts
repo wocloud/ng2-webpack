@@ -14,7 +14,7 @@ import { MENU } from './app.menu';
         <div class="app-aside">
             <sf-sidebar></sf-sidebar>
         </div>
-        <div class="app-content">
+        <div class="app-content app-header-fixed">
             <sf-header></sf-header>
             <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
             <div class="app-content-body app-full-height fade-in-up">

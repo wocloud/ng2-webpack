@@ -561,6 +561,11 @@ body {
   top: 0;
   width: 100%;
 }
+.app-header-fixed .app-content-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 .app-header {
   z-index: 1025;
   border-radius: 0;

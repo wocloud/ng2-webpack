@@ -6,6 +6,16 @@
 
 <h2>Test/Demo Table Component--sf-table</h2>
 <span class="line-dashed"></span>
-<sf-table [rows]="rows" [columns]="columns" [config]="config" (rowClicked)="rowClicked($event)"></sf-table>
-<pre *ngIf="config.paging.flag" class="card card-block card-header">Page: {{config.paging.currentPage}} / {{config.paging.numPages}}</pre>
+<!--<div class="btn-toolbar m-xs m-l-none">-->
+    <!--<input type="text" placeholder="all columns..."-->
+           <!--*ngIf="config.filtering.flag"-->
+           <!--[sfTableFiltering]="config.filtering"-->
+           <!--(tableChanged)="onFilterTable(config)"/>-->
+<!--</div>-->
+<sf-table [rows]="rows"
+          [columns]="columns"
+          [config]="config"
+          (rowClicked)="rowClicked($event)"
+          (tableChanged)="onFilterTable(config)"></sf-table>
+<pre *ngIf="config.paging.flag" class="card card-block card-header">Page: {{config.paging.currentPage}} / {{config.paging.numPages}}   Total Number of Datas: {{data.length}}   Number of Filtered Datas: {{rows.length}}</pre>
 <pre class="card card-block card-header">Selected Row: <span *ngFor="let select of selectedRow">{{select.name}}, </span></pre>

@@ -1,11 +1,15 @@
 /**
  * Created by sophia.wang on 17/3/7.
  */
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'sf-table',
     template: `
+    <div class="btn-toolbar m-xs m-l-none">
+        <input type="text" placeholder="all columns..."
+               *ngIf="config.filtering.flag"/>
+    </div>
     <table class="table dataTable" ngClass="{{config.className || ''}}" role="grid" style="width: 100%;">
         <thead>
             <tr role="row">
@@ -13,7 +17,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let row of pageDatas" (click)="onRowClicked(row)">
+            <tr *ngFor="let row of rowData" (click)="onRowClicked(row)">
                 <td *ngFor="let column of columns">{{getData(row, column.name)}}</td>
             </tr>
         </tbody>
@@ -34,6 +38,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 export class SFTableComponent implements OnInit{
     @Input() public rows:Array<any> = [];
+    private rowData:Array<any> = [];
     @Input()
     public set config(conf:any) {
         if (!conf.className) {
@@ -65,7 +70,6 @@ export class SFTableComponent implements OnInit{
 
     public _columns:Array<any> = [];
     public _config:any = {};
-    public pageDatas:Array<any> = [];
 
     public get columns(): Array<any> {
         return this._columns;
@@ -73,18 +77,6 @@ export class SFTableComponent implements OnInit{
 
     public get config(): any {
         return this._config;
-    }
-
-    public get configColumns():any {
-        let sortColumns:Array<any> = [];
-
-        this.columns.forEach((column:any) => {
-            if (column.sort) {
-                sortColumns.push(column);
-            }
-        });
-
-        return {columns: sortColumns};
     }
 
     /**
@@ -95,6 +87,8 @@ export class SFTableComponent implements OnInit{
     ngOnInit () {
         if(this._config.paging.flag && this.rows.length > this._config.paging.itemsPerPage) {
             this.changePage(1);
+        } else {
+            this.rowData = this.rows;
         }
     }
 
@@ -109,31 +103,16 @@ export class SFTableComponent implements OnInit{
     }
 
     /**
-     * page change event
-     * @param currentPage
+     * row click event
+     * @param row
      */
-    public changePage(currentPage:number): void {
-        let itemsPerPage = this._config.paging.itemsPerPage;
-        let end = itemsPerPage > -1 ? itemsPerPage*currentPage : this.rows.length;
-        this.pageDatas = this.rows.slice(itemsPerPage*(currentPage-1), end);
-    }
-
-    /**
-     * table change event
-     * @param column
-     */
-    public onChangeTable(column:any):void {
-        this._columns.forEach((col:any) => {
-            if (col.name !== column.name && col.sort !== false) {
-                col.sort = '';
-            }
-        });
-        this.tableChanged.emit({sorting: this.configColumns});
-    }
-
     public onRowClicked(row) {
         this.rowClicked.emit(row);
     }
+
+    ///////////////////////////////////////////////////////
+    /////////////           Paging          ///////////////
+    ///////////////////////////////////////////////////////
 
     /**
      * fired when page was changed
@@ -143,5 +122,59 @@ export class SFTableComponent implements OnInit{
         console.log('Page changed to: ' + event.page);
         let currentPage = event.page;
         this.changePage(currentPage);
+    }
+
+    /**
+     * page change event
+     * @param currentPage
+     */
+    public changePage(currentPage:number): void {
+        let itemsPerPage = this._config.paging.itemsPerPage;
+        let end = itemsPerPage > -1 ? itemsPerPage*currentPage : this.rows.length;
+        this.rowData = this.rows.slice(itemsPerPage*(currentPage-1), end);
+        console.log(this.rowData.length);
+        this.tableChanged.emit(this._columns);
+    }
+
+    ///////////////////////////////////////////////////////
+    /////////////        Filtering          ///////////////
+    ///////////////////////////////////////////////////////
+    @HostListener('input', ['$event.target.value'])
+    public onFilterTable(event:any): void {
+        console.log('filter the table by : ' + this._config.filtering.filterString);
+        if(!this._config.filtering.flag) {
+            return;
+        }
+        this._config.filtering.filterString = event;
+        let filteredData = this.changeFilter(this.rows, this._config.filtering);
+        this.rows = filteredData;
+        this.changePage(1);
+    }
+
+    public changeFilter(data:any, filtering:any):Array<any> {
+        let filteredData:Array<any> = data;
+
+        if(!filtering.flag) {
+            return filteredData;
+        }
+
+        if(filtering.filterColumn) {
+            return filteredData.filter((item:any) =>
+                item[filtering.filterColumn].match(this._config.filtering.filterString));
+        }
+
+        let temp:Array<any> = [];
+        filteredData.forEach((item:any) => {
+            let flag = false;
+            this.columns.forEach((column:any) => {
+                if(item[column.name].toString().match(this._config.filtering.filterString))
+                    flag = true;
+            });
+            if(flag) {
+                temp.push(item);
+            }
+        });
+        filteredData = temp;
+        return filteredData;
     }
 }
