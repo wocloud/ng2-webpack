@@ -29,7 +29,7 @@ export class ThemeConfigProvider {
         asideColor: 'bg-black',
         headerFixed: false,
         asideFixed: false,
-        asideFolded: false,
+        asideFolded: true,
         asideDock: false,
         container: false
     };
@@ -55,7 +55,7 @@ export class ThemeConfigProvider {
             asideColor: this.settings.asideColor,
             headerFixed: this.settings.headerFixed,
             asideFixed: this.settings.asideFixed,
-            asideFolded: this.settings.asideFolded,
+            asideCollapsed: this.settings.asideCollapsed,
             asideDock: this.settings.asideDock,
             container: this.settings.container
         }

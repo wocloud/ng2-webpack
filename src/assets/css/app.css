@@ -584,19 +584,6 @@ body {
   background-color: inherit;
   border: inherit;
 }
-.app-aside-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  z-index: 1000;
-  max-width: 200px;
-}
-.app-aside-folded .app-aside-footer {
-  max-width: 60px;
-}
-.app-aside-footer ~ div {
-  padding-bottom: 50px;
-}
 .app-aside-right {
   padding-bottom: 50px;
 }
@@ -641,7 +628,8 @@ body {
 .app-content-footer {
   position: absolute;
   left: 0;
-  bottom: 0px;
+  right: 0;
+  bottom: 0;
 }
 .app-footer {
   position: absolute;
@@ -761,11 +749,11 @@ body {
 @media (min-width: 768px) {
   .app-aside,
   .navbar-header {
-    width: 200px;
+    width: 60px;
   }
   .app-content,
   .app-footer {
-    margin-left: 200px;
+    margin-left: 60px;
   }
   .app-aside-right {
     position: absolute;
@@ -799,57 +787,54 @@ body {
   .app-aside-folded .navbar-header {
     width: 60px;
   }
-  .app-aside-folded .app-content,
-  .app-aside-folded .app-footer {
-    margin-left: 60px;
-  }
   .app-aside-folded .app-header .navbar-brand {
     display: block;
     padding: 0;
   }
-  .app-aside-fixed .app-header .navbar-header {
-    position: fixed;
+  .app-aside-expanded .app-aside,
+  .app-aside-expanded .navbar-header {
+    width: 200px;
   }
-  .app-aside-fixed .aside-wrap {
-    position: fixed;
-    overflow: hidden;
+  .app-aside-expanded .app-content,
+  .app-aside-expanded .app-footer {
+    margin-left: 200px;
+  }
+  .app-aside-expanded .app-aside-right {
+    position: absolute;
     top: 50px;
     bottom: 0;
-    left: 0;
-    width: 200px;
+    right: 0;
     z-index: 1000;
   }
-  .app-aside-fixed .aside-wrap .navi-wrap {
-    width: 217px;
-    position: relative;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
-  .app-aside-fixed .aside-wrap .navi-wrap::-webkit-scrollbar {
-    -webkit-appearance: none;
-  }
-  .app-aside-fixed .aside-wrap .navi-wrap::-webkit-scrollbar:vertical {
-    width: 17px;
-  }
-  .smart .app-aside-fixed .aside-wrap .navi-wrap {
-    width: 200px;
-  }
-  .app-aside-fixed.app-aside-folded .app-aside {
-    position: fixed;
-    top: 0;
-    bottom: 0;
+  .app-aside-expanded .app-aside-right.pos-fix {
     z-index: 1010;
   }
-  .app-aside-fixed.app-aside-folded .aside-wrap {
+  .app-aside-fixed .hidden-folded {
+    display: none !important;
+  }
+  .app-aside-fixed .visible-folded {
+    display: inherit;
+  }
+  .app-aside-fixed .text-center-folded {
+    text-align: center;
+  }
+  .app-aside-fixed .pull-none-folded {
+    float: none !important;
+  }
+  .app-aside-fixed .w-auto-folded {
+    width: auto;
+  }
+  .app-aside-fixed .app-aside,
+  .app-aside-fixed .navbar-header {
     width: 60px;
   }
-  .app-aside-fixed.app-aside-folded .aside-wrap .navi-wrap {
-    width: 77px;
+  .app-aside-fixed .app-content,
+  .app-aside-fixed .app-footer {
+    margin-left: 60px;
   }
-  .smart .app-aside-fixed.app-aside-folded .aside-wrap .navi-wrap {
-    width: 60px;
+  .app-aside-fixed .app-header .navbar-brand {
+    display: block;
+    padding: 0;
   }
   .bg-auto:before {
     content: "";

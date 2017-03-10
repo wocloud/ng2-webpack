@@ -64,19 +64,19 @@ body{
 	}
 }
 
-.app-aside-footer{
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	z-index: 1000;
-	max-width: @app-aside-width;
-	.app-aside-folded & {
-		max-width: @app-aside-folded-width;
-	}
-	~ div{
-		padding-bottom: 50px;
-	}
-}
+//.app-aside-footer{
+//	position: absolute;
+//	bottom: 0;
+//	width: 100%;
+//	z-index: 1000;
+//	max-width: @app-aside-width;
+//	.app-aside-folded & {
+//		max-width: @app-aside-folded-width;
+//	}
+//	~ div{
+//		padding-bottom: 50px;
+//	}
+//}
 
 .app-aside-right{
 	padding-bottom: @app-header-height;
@@ -247,11 +247,11 @@ body{
 @media (min-width: 768px) {
 	.app-aside,
 	.navbar-header {
-		width: @app-aside-width;
+		width: @app-aside-folded-width;
 	}
 	.app-content,
 	.app-footer{
-		margin-left: @app-aside-width;
+		margin-left: @app-aside-folded-width;
 	}
 
 	.app-aside-right{
@@ -288,6 +288,59 @@ body{
 		.navbar-header {
 			width: @app-aside-folded-width;
 		}
+		.app-header{
+			.navbar-brand{
+				display: block;
+				padding: 0;
+			}
+		}
+		
+	}
+
+	.app-aside-expanded{
+		.app-aside,
+		.navbar-header {
+			width: @app-aside-width;
+		}
+		.app-content,
+		.app-footer{
+			margin-left: @app-aside-width;
+		}
+
+		.app-aside-right{
+			position: absolute;
+			top: @app-header-height;
+			bottom: 0;
+			right: 0;
+			z-index: 1000;
+			&.pos-fix{
+				z-index: 1010;
+			}
+		}
+
+	}
+
+	.app-aside-fixed{
+		.hidden-folded{
+			display: none !important;
+		}
+		.visible-folded{
+			display: inherit;
+		}
+		.text-center-folded{
+			text-align: center;
+		}
+		.pull-none-folded{
+			float: none !important;
+		}
+		.w-auto-folded{
+			width: auto;
+		}
+
+		.app-aside,
+		.navbar-header {
+			width: @app-aside-folded-width;
+		}
 		.app-content,
 		.app-footer{
 			margin-left: @app-aside-folded-width;
@@ -298,59 +351,59 @@ body{
 				padding: 0;
 			}
 		}
-		
+
 	}
 
-	.app-aside-fixed{		
-		.app-header{
-			.navbar-header{
-				position: fixed;
-			}			
-		}
-		.aside-wrap{
-			position: fixed;
-			overflow: hidden;
-			top: @app-header-height;
-			bottom: 0;
-			left: 0;
-			width: @app-aside-width;
-			z-index: 1000;
-			.navi-wrap{
-				width: @app-aside-width + @scroll-bar-width;
-				position: relative;
-				height: 100%;
-				overflow-x:hidden;
-				overflow-y: scroll;
-				-webkit-overflow-scrolling: touch;
-				&::-webkit-scrollbar {
-				  -webkit-appearance: none;
-				}
-				&::-webkit-scrollbar:vertical {
-				  width: @scroll-bar-width;
-				}
-			}
-			.smart & .navi-wrap{
-				width: @app-aside-width;
-			}
-		}
-		&.app-aside-folded{
-			.app-aside{
-				position: fixed;
-				top: 0;
-				bottom: 0;
-				z-index: 1010;
-			}
-			.aside-wrap{
-				width: @app-aside-folded-width;
-				.navi-wrap{
-					width: @app-aside-folded-width + @scroll-bar-width;
-				}
-				.smart & .navi-wrap{
-					width: @app-aside-folded-width;
-				}
-			}
-		}
-	}
+	//.app-aside-fixed{
+	//	.app-header{
+	//		.navbar-header{
+	//			position: fixed;
+	//		}
+	//	}
+	//	.aside-wrap{
+	//		position: fixed;
+	//		overflow: hidden;
+	//		top: @app-header-height;
+	//		bottom: 0;
+	//		left: 0;
+	//		width: @app-aside-width;
+	//		z-index: 1000;
+	//		.navi-wrap{
+	//			width: @app-aside-width + @scroll-bar-width;
+	//			position: relative;
+	//			height: 100%;
+	//			overflow-x:hidden;
+	//			overflow-y: scroll;
+	//			-webkit-overflow-scrolling: touch;
+	//			&::-webkit-scrollbar {
+	//			  -webkit-appearance: none;
+	//			}
+	//			&::-webkit-scrollbar:vertical {
+	//			  width: @scroll-bar-width;
+	//			}
+	//		}
+	//		.smart & .navi-wrap{
+	//			width: @app-aside-width;
+	//		}
+	//	}
+	//	&.app-aside-folded{
+	//		.app-aside{
+	//			position: fixed;
+	//			top: 0;
+	//			bottom: 0;
+	//			z-index: 1010;
+	//		}
+	//		.aside-wrap{
+	//			width: @app-aside-folded-width;
+	//			.navi-wrap{
+	//				width: @app-aside-folded-width + @scroll-bar-width;
+	//			}
+	//			.smart & .navi-wrap{
+	//				width: @app-aside-folded-width;
+	//			}
+	//		}
+	//	}
+	//}
 
 	.bg-auto{
 		&:before{

@@ -17,7 +17,7 @@ import { Component, OnInit, EventEmitter, HostListener, Input, Output } from '@a
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let row of rowData" (click)="onRowClicked(row)">
+            <tr *ngFor="let row of pageData" (click)="onRowClicked(row)">
                 <td *ngFor="let column of columns">{{getData(row, column.name)}}</td>
             </tr>
         </tbody>
@@ -38,6 +38,7 @@ import { Component, OnInit, EventEmitter, HostListener, Input, Output } from '@a
 
 export class SFTableComponent implements OnInit{
     @Input() public rows:Array<any> = [];
+    private pageData:Array<any> = [];
     private rowData:Array<any> = [];
     @Input()
     public set config(conf:any) {
@@ -86,7 +87,7 @@ export class SFTableComponent implements OnInit{
 
     ngOnInit () {
         if(this._config.paging.flag && this.rows.length > this._config.paging.itemsPerPage) {
-            this.changePage(1);
+            this.changePage(1, this.rows);
         } else {
             this.rowData = this.rows;
         }
@@ -121,19 +122,20 @@ export class SFTableComponent implements OnInit{
     public pageChanged(event:any):void {
         console.log('Page changed to: ' + event.page);
         let currentPage = event.page;
-        this.changePage(currentPage);
+        this.changePage(currentPage, this.rowData);
     }
 
     /**
      * page change event
      * @param currentPage
      */
-    public changePage(currentPage:number): void {
+    public changePage(currentPage:number, data:Array<any>): void {
         let itemsPerPage = this._config.paging.itemsPerPage;
-        let end = itemsPerPage > -1 ? itemsPerPage*currentPage : this.rows.length;
-        this.rowData = this.rows.slice(itemsPerPage*(currentPage-1), end);
-        console.log(this.rowData.length);
-        this.tableChanged.emit(this._columns);
+        let end = itemsPerPage > -1 ? itemsPerPage*currentPage : data.length;
+        this.pageData = data.slice(itemsPerPage*(currentPage-1), end);
+        this._config.paging.totalItems = data.length;
+        this._config.paging.numPages = Math.ceil(data.length/this._config.paging.itemsPerPage);
+        this.tableChanged.emit(data);
     }
 
     ///////////////////////////////////////////////////////
@@ -147,8 +149,8 @@ export class SFTableComponent implements OnInit{
         }
         this._config.filtering.filterString = event;
         let filteredData = this.changeFilter(this.rows, this._config.filtering);
-        this.rows = filteredData;
-        this.changePage(1);
+        this.rowData = filteredData;
+        this.changePage(1, filteredData);
     }
 
     public changeFilter(data:any, filtering:any):Array<any> {

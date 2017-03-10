@@ -12,29 +12,60 @@ import { GlobalState } from '../../../global.state';
 export class AsideComponent {
 
     private app:any = {};
-    private isMenuCollapsed: boolean = false; //default is open.
+    private isAsideFixed: boolean = false;   //default is float
+    private isAsideCollapsed: boolean = true;   //default is collapsed
 
     constructor(private _config: ThemeConfig,
                 private _state:GlobalState) {
 
         this.app = this._config.app;
 
-        this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
-            this.isMenuCollapsed = isCollapsed;
+        this._state.subscribe('aside.collapsed', (isCollapsed) => {
+            this.isAsideCollapsed = isCollapsed;
+        });
+
+        this._state.subscribe('aside.fixed', (isFixed) => {
+            this.isAsideFixed = isFixed;
         });
     }
 
-    public menuExpand():void {
-        this.menuCollapseStateChange(true);
+    ///////////////////////////////////////////////
+    ////////////       Aside      /////////////////
+    ///////////////////////////////////////////////
+    public asideExpand():void {
+        this.asideCollapseChange(false);
     }
 
-    public menuCollapse():void {
-        this.menuCollapseStateChange(false);
+    public asideCollapse():void {
+        this.asideCollapseChange(true);
     }
 
-    public menuCollapseStateChange(isCollapsed:boolean):void {
-        //console.log('menuCollapseStateChange(still not add styles, just function): ' + isCollapsed);
-        this.isMenuCollapsed = isCollapsed;
-        this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
+    public asideCollapseChange(isCollapsed:boolean):void {
+        this.isAsideCollapsed = isCollapsed;
+        console.log(this.isAsideCollapsed);
+        this._state.notifyDataChanged('aside.collapsed', this.isAsideCollapsed);
     }
+
+    public asideFixedChanged():void {
+        this.isAsideFixed = !this.isAsideFixed;
+        console.log(this.isAsideFixed);
+        this._state.notifyDataChanged('aside.fixed', this.isAsideFixed);
+    }
+
+    ///////////////////////////////////////////////
+    ////////////       Menu       /////////////////
+    ///////////////////////////////////////////////
+    //public menuExpand():void {
+    //    this.menuCollapseStateChange(true);
+    //}
+    //
+    //public menuCollapse():void {
+    //    this.menuCollapseStateChange(false);
+    //}
+    //
+    //public menuCollapseStateChange(isCollapsed:boolean):void {
+    //    //console.log('menuCollapseStateChange(still not add styles, just function): ' + isCollapsed);
+    //    this.isMenuCollapsed = isCollapsed;
+    //    this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
+    //}
 }

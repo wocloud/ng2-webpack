@@ -1,25 +1,25 @@
-<aside class="navi"
-       [ngClass]="app.settings.asideColor"
-       (mouseover)="menuExpand()"
-       (mouseout)="menuCollapse()">
-    <!-- navbar header -->
-    <div class="navbar-header" [ngClass]="app.settings.navbarHeaderColor">
-        <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
-            <i class="glyphicon glyphicon-cog"></i>
-        </button>
-        <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
-            <i class="glyphicon glyphicon-align-justify"></i>
-        </button>
-        <!-- brand -->
-        <a href="#/" class="navbar-brand text-lt">
-            <i class="fa fa-btc"></i>
-            <img src="/assets/img/logo.png" alt="." class="hide">
-            <span class="hidden-folded m-l-xs">{{app.name}}</span>
-        </a>
-        <!-- / brand -->
-    </div>
-    <!-- / navbar header -->
+<div class="app-aside" (mouseenter)="asideExpand()" (mouseout)="asideCollapse()">
+    <aside class="navi" [ngClass]="app.settings.asideColor">
+        <!-- navbar header -->
+        <div class="navbar-header" [ngClass]="app.settings.navbarHeaderColor">
+            <!-- setting -->
+            <button class="pull-right" ui-toggle-class="show" data-target=".navbar-collapse" (click)="asideFixedChanged()">
+                <i class="fa fa-pinterest" aria-hidden="true"></i>
+                <!--[ngClass]="{'fa-pinterest-p': app.settings.asideFolded, 'fa-eercast':!app.settings.asideFolded}"></i>-->
+            </button>
+            <!-- / setting -->
 
-    <sf-menu [sidebarCollapsed]="isMenuCollapsed" (expandMenu)="menuExpand()"></sf-menu>
-    <div class="clearfix"></div>
-</aside>
+            <!-- brand -->
+            <a href="#/" class="navbar-brand text-lt">
+                <i class="fa fa-btc"></i>
+                <img src="/assets/img/logo.png" alt="." class="hide">
+                <span class="hidden-folded m-l-xs">{{app.name}}</span>
+            </a>
+            <!-- / brand -->
+        </div>
+        <!-- / navbar header -->
+
+        <sf-menu [sidebarCollapsed]="isAsideCollapsed" (expandMenu)="menuExpand()"></sf-menu>
+        <div class="clearfix"></div>
+    </aside>
+</div>

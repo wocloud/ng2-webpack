@@ -18,8 +18,8 @@ export class ContactComponent implements OnInit{
     ];
 
     ////////////////table/////////////////////
-    public rows:Array<any> = [];
-    private data:Array<any> = TableData;
+    public rows:Array<any> = TableData;
+    private filterRows:Array<any> = [];
     public columns:Array<any> = [
         {title: 'Name', name: 'name'},
         {title: 'Position', name: 'position'},
@@ -39,7 +39,7 @@ export class ContactComponent implements OnInit{
             currentPage: 1      //the default page after the table component loading
         },
         filtering: {
-            flag: false,
+            flag: true,
             filterString: '',
             filterColumn: ''
         },
@@ -47,55 +47,16 @@ export class ContactComponent implements OnInit{
     };
     public selectedRow:Array<any> = [];
 
-    constructor() {
-        this.config.paging.totalItems = this.data.length;
-    }
+    constructor() {}
 
-    ngOnInit():void {
-        this.onFilterTable(this.config);
-    }
+    OnInit(){}
 
     public rowClicked($event): void {
         this.selectedRow.push($event);
     }
 
-    public onFilterTable(config:any): void {
-        console.log('filter the table by : ' + config.filtering.filterString);
-        if(config.filtering.flag) {
-            Object.assign(this.config.filtering, config.filtering);
-        }
-
-        this.rows = this.changeFilter(this.data, this.config.filtering);
-        this.config.paging.totalItems = this.rows.length;
-        let numberPages = Math.ceil(this.rows.length/this.config.paging.itemsPerPage);
-        this.config.paging.numPages = numberPages > 1 ? numberPages : 1;
+    public onChangeTable($event):any {
+        this.filterRows = $event;
+        console.log('Table Changed....');
     }
-
-    public changeFilter(data:any, filtering:any):Array<any> {
-        let filteredData:Array<any> = data;
-
-        if(!filtering.flag) {
-            return filteredData;
-        }
-
-        if(filtering.filterColumn) {
-            return filteredData.filter((item:any) =>
-                item[filtering.filterColumn].match(this.config.filtering.filterString));
-        }
-
-        let temp:Array<any> = [];
-        filteredData.forEach((item:any) => {
-            let flag = false;
-            this.columns.forEach((column:any) => {
-                if(item[column.name].toString().match(this.config.filtering.filterString))
-                    flag = true;
-            });
-            if(flag) {
-                temp.push(item);
-            }
-        });
-        filteredData = temp;
-        return filteredData;
-    }
-
 }
