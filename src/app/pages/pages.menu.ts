@@ -27,5 +27,87 @@ export const PAGES_MENU = [
                 }
             }
         ]
+    },
+    {
+        path: 'editors',
+        data: {
+            title: 'Editors',
+            icon: 'fa-edit'
+        },
+        children: [
+            {
+                path: 'ckeditor',
+                data: {
+                    title: 'CKEditor'
+                }
+            }
+        ]
+    },
+    {
+        path: 'ui',
+        data: {
+            title: 'UI Features',
+            icon: 'fa-android-laptop'
+        },
+        children: [
+            {
+                path: 'typography',
+                data: {
+                    title: 'Typography'
+                }
+            },
+            {
+                path: 'buttons',
+                data: {
+                    title: 'Buttons'
+                }
+            },
+            {
+                path: 'icons',
+                data: {
+                    title: 'Icons'
+                }
+            },
+            {
+                path: 'modals',
+                data: {
+                    title: 'Modals'
+                }
+            },
+            {
+                path: 'grid',
+                data: {
+                    title: 'Grid'
+                }
+            },
+        ]
+    },
+    {
+        path: 'forms',
+        data: {
+            title: 'Form Elements',
+            icon: 'fa-compose'
+        },
+        children: [
+            {
+                path: 'inputs',
+                data: {
+                    title: 'Form Inputs'
+                }
+            },
+            {
+                path: 'layouts',
+                data: {
+                    title: 'Form Layouts'
+                }
+            }
+        ]
+    },
+    {
+        path: 'tables',
+        data: {
+            title: 'Tables',
+            icon: 'fa-grid',
+        }
     }
 ]

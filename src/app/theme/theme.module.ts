@@ -11,15 +11,21 @@ import {
     AsideComponent,
     MenuItemComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    SFBreadcrumbComponent,
+    CardComponent,
+    SFTableModule
 } from './components/index';
+import {SFTableModule} from "../components/table/sf.table.module";
 
 const THEME_COMPONENTS = [
     HeaderComponent,
     AsideComponent,
     MenuItemComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    SFBreadcrumbComponent,
+    CardComponent
 ];
 
 @NgModule({
@@ -28,10 +34,11 @@ const THEME_COMPONENTS = [
     ],
     imports: [
         CommonModule,
-        RouterModule,
+        RouterModule
     ],
     exports: [
-        ...THEME_COMPONENTS
+        ...THEME_COMPONENTS,
+        SFTableModule
     ]
 })
 export class ThemeModule {

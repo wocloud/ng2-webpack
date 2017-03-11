@@ -52,6 +52,10 @@ export class AsideComponent {
         this._state.notifyDataChanged('aside.fixed', this.isAsideFixed);
     }
 
+    public asideFixedChanged():void {
+        this.isAsideCollapsed = !this.isAsideCollapsed;
+        this._state.notifyDataChanged('aside.collapsed', this.isAsideCollapsed);
+    }
     ///////////////////////////////////////////////
     ////////////       Menu       /////////////////
     ///////////////////////////////////////////////
