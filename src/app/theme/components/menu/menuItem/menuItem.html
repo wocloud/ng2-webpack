@@ -4,14 +4,14 @@
        (mouseenter)="onHoverMenuItem($event, item)"
        [routerLink]="menuItem.route.paths">
         <span class="font-bold">{{ menuItem.title }}</span>
-        <i class="fa text-primary-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
+        <i class="fa text-success-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
     </a>
 
     <a class="menu-list-title" *ngIf="!menuItem.children && menuItem.url"
        (mouseenter)="onHoverMenuItem($event, item)"
        [href]="menuItem.url" [target]="menuItem.target">
         <span class="font-bold">{{ menuItem.title }}</span>
-        <i class="fa text-primary-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
+        <i class="fa text-success-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
     </a>
 
     <a class="menu-list-title" *ngIf="menuItem.children" href
@@ -21,7 +21,7 @@
             <i class="fa fa-fw fa-angle-right" [ngClass]="{'fa-angle-down': menuItem.expanded}"></i>
         </span>
         <span class="font-bold">{{ menuItem.title }}</span>
-        <i class="fa text-primary-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
+        <i class="fa text-success-lt" *ngIf="menuItem.icon" [ngClass]="menuItem.icon"></i>
     </a>
 
     <!--- sub menu ---->

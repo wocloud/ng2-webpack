@@ -1,11 +1,11 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule }  from '@angular/router';
-import { PagesComponent } from './pages.component';
-
-export const routes: Routes = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var router_1 = require("@angular/router");
+var pages_component_1 = require("./pages.component");
+exports.routes = [
     {
         path: '',
-        component: PagesComponent,
+        component: pages_component_1.PagesComponent,
         children: [
             { path: '', redirectTo: 'dashboards', pathMatch: 'full' },
             { path: 'dashboards', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule' },
@@ -16,5 +16,5 @@ export const routes: Routes = [
         ]
     }
 ];
-
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+exports.routing = router_1.RouterModule.forChild(exports.routes);
+//# sourceMappingURL=pages.routing.js.map

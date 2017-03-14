@@ -6,4 +6,4 @@ export * from './footer/footer.component';
 
 export * from './breadcrumb';
 export * from './card';
-export * from './table';
+export * from './table/sf.table.module';

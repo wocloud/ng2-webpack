@@ -1,0 +1,89 @@
+<div class="panel-default">
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-3">
+            <sf-card title="Button Common">
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-default">Default</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-success">Success</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-info">Info</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-warning">Warning</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-danger">Danger</button>
+                </div>
+            </sf-card>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-3">
+            <sf-card title="Button Different Size ">
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-default  btn-xs">Default</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-primary  btn-sm">Primary</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-success btn-mm">Success</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-info btn-md">Info</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-warning btn-xm">Warning</button>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn btn-danger btn-lg">Danger</button>
+                </div>
+            </sf-card>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-3">
+            <sf-card title="Button Dropdowns">
+                <div class="btn-group" dropdown>
+                    <button id="split-button" type="button" class="btn btn-danger">Action</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle-split" dropdownToggle>
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="split-button">
+                        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li class="divider dropdown-divider"></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </sf-card>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-3">
+            <sf-card title="Button Disable">
+                <button type="button" class="btn btn-primary" [disabled]="disabled">Button</button>
+                <button type="button" class="btn btn-warning" (click)="disabled = !disabled">Enable/Disable</button>
+            </sf-card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <sf-card title="Button Checkbox">
+                <buttons-checkbox></buttons-checkbox>
+            </sf-card>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <sf-card title="Button Radio & Uncheckable Radio">
+                <buttons-radio></buttons-radio>
+            </sf-card>
+        </div>
+    </div>
+
+</div>
