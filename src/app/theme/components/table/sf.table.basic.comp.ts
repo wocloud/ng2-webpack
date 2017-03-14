@@ -2,6 +2,7 @@
  * Created by sophia.wang on 17/3/7.
  */
 import { Component, OnInit, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'sf-table',
@@ -18,7 +19,7 @@ import { Component, OnInit, EventEmitter, HostListener, Input, Output } from '@a
         </thead>
         <tbody>
             <tr *ngFor="let row of pageData" (click)="onRowClicked(row)">
-                <td *ngFor="let column of columns">{{getData(row, column.name)}}</td>
+                <td *ngFor="let column of columns" [innerHtml]="sanitize(getData(row, column.name))"></td>
             </tr>
         </tbody>
     </table>
@@ -83,7 +84,11 @@ export class SFTableComponent implements OnInit{
     /**
      * constructor and init
      */
-    constructor () {}
+    constructor (private sanitizer:DomSanitizer) {}
+
+    public sanitize(html:string):SafeHtml {
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    }
 
     ngOnInit () {
         if(this._config.paging.flag && this.rows.length > this._config.paging.itemsPerPage) {
