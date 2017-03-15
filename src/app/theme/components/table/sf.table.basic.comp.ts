@@ -14,11 +14,13 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     <table class="table dataTable" ngClass="{{config.className || ''}}" role="grid" style="width: 100%;">
         <thead>
             <tr role="row">
+                <th *ngIf="config.checkbox" (click)="selectAll($event)"><input type="checkbox" [checked]="_isChecked"></th>
                 <th *ngFor="let column of columns">{{column.title}}</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let row of pageData" (click)="onRowClicked(row)">
+                <td *ngIf="config.checkbox"><input type="checkbox" [checked]="_isChecked" [(ngModel)]="row.selected"></td>
                 <td *ngFor="let column of columns" [innerHtml]="sanitize(getData(row, column.name))"></td>
             </tr>
         </tbody>
@@ -38,9 +40,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 
 export class SFTableComponent implements OnInit{
-    @Input() public rows:Array<any> = [];
-    private pageData:Array<any> = [];
-    private rowData:Array<any> = [];
+    @Input() public rows:Array<any> = [];   //传入的数据 rows
+    private pageData:Array<any> = [];       //每页的数据  pageData
+    private totalData:Array<any> = [];      //筛选过滤后的全部数据 totalData
     @Input()
     public set config(conf:any) {
         if (!conf.className) {
@@ -66,12 +68,15 @@ export class SFTableComponent implements OnInit{
             }
         });
     }
-
+    
     @Output() public tableChanged:EventEmitter<any> = new EventEmitter();
     @Output() public rowClicked:EventEmitter<any> = new EventEmitter();
+    @Output() public selectedRows:EventEmitter<any> = new EventEmitter();
 
     public _columns:Array<any> = [];
     public _config:any = {};
+    public _selectedRows:Array<any> = [];   //所有选中的行
+    public _isChecked:boolean = false;
 
     public get columns(): Array<any> {
         return this._columns;
@@ -91,10 +96,9 @@ export class SFTableComponent implements OnInit{
     }
 
     ngOnInit () {
+        this.totalData = this.rows;
         if(this._config.paging.flag && this.rows.length > this._config.paging.itemsPerPage) {
             this.changePage(1, this.rows);
-        } else {
-            this.rowData = this.rows;
         }
     }
 
@@ -113,7 +117,33 @@ export class SFTableComponent implements OnInit{
      * @param row
      */
     public onRowClicked(row) {
-        this.rowClicked.emit(row);
+        row.selected = !row.selected;
+        console.log('row.selected: ' + row.selected);
+        if(row.selected) {
+            this.rowClicked.emit(row);
+            if($.inArray(row, this._selectedRows) == -1) {
+                this._selectedRows.push(row);
+            }
+        } else {
+            this.rowClicked.emit(null);
+            if($.inArray(row, this._selectedRows) > -1) {
+                this._selectedRows.splice($.inArray(row, this._selectedRows), 1);
+            }
+        }
+        this.selectedRows.emit(this._selectedRows);
+    }
+
+    /**
+     * checkbox select all rows.
+     */
+    public selectAll($event) {
+        this._isChecked = $event.target.checked;
+        if(this._isChecked) {
+            this._selectedRows = this.totalData;
+        } else {
+            this._selectedRows = [];
+        }
+        this.selectedRows.emit(this._selectedRows);
     }
 
     ///////////////////////////////////////////////////////
@@ -127,7 +157,7 @@ export class SFTableComponent implements OnInit{
     public pageChanged(event:any):void {
         console.log('Page changed to: ' + event.page);
         let currentPage = event.page;
-        this.changePage(currentPage, this.rowData);
+        this.changePage(currentPage, this.totalData);
     }
 
     /**
@@ -154,8 +184,8 @@ export class SFTableComponent implements OnInit{
         }
         this._config.filtering.filterString = event;
         let filteredData = this.changeFilter(this.rows, this._config.filtering);
-        this.rowData = filteredData;
-        this.changePage(1, filteredData);
+        this.totalData = filteredData;
+        this.changePage(this._config.paging.currentPage, filteredData);
     }
 
     public changeFilter(data:any, filtering:any):Array<any> {

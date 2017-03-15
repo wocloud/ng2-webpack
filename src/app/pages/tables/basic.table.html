@@ -1,10 +1,11 @@
 <h2>Test/Demo Table Component--sf-table</h2>
 <span class="line-dashed"></span>
 <pre *ngIf="config.paging.flag" class="card card-block card-header">
-    Page: {{config.paging.currentPage}} / {{config.paging.numPages}}   Total Number of Rows: {{rows.length}}   Number of Filtered Data: {{filterRows.length}}</pre>
+    Page: {{config.paging.currentPage}} / {{config.paging.numPages}}   Total Number of Rows: {{rows.length}}</pre>
 <sf-table [rows]="rows"
           [columns]="columns"
           [config]="config"
-          (rowClicked)="rowClicked($event)"
+          (rowClicked)="onRowClicked($event)"
+          (selectedRows)="onSelectedRows($event)"
           (tableChanged)="onChangeTable($event)"></sf-table>
-<pre class="card card-block card-header">Selected Row: <span *ngFor="let select of selectedRow">{{select.name}}, </span></pre>
+<pre class="card card-block card-header">Selected Row: <span *ngFor="let select of selectedRows">{{select.name}}, </span></pre>

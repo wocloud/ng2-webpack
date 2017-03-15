@@ -13,6 +13,8 @@ export class TablesComponent implements OnInit{
 
     public rows:Array<any> = TableData;
 
+    public selectedRows:Array<any> = [];     //all selected rows
+
     private filterRows:Array<any> = [];
 
     public columns:Array<any> = [
@@ -39,17 +41,20 @@ export class TablesComponent implements OnInit{
             filterString: '',
             filterColumn: ''
         },
+        checkbox: true,
         className: ['table-striped', 'table-bordered']
     };
-
-    public selectedRow:Array<any> = [];
 
     constructor() {}
 
     OnInit(){}
 
-    public rowClicked($event): void {
-        this.selectedRow.push($event);
+    public onRowClicked($event): void {
+        console.log($event);
+    }
+
+    public onSelectedRows($event): void {
+        this.selectedRows = $event;
     }
 
     public onChangeTable($event):any {
