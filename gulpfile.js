@@ -6,6 +6,7 @@
 let gulp = require('gulp'),
     webpack = require('gulp-webpack'),
     less = require('gulp-less'),
+    sass = require('gulp-sass'),
     minifycss = require('gulp-minify-css'),
     //jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
@@ -32,6 +33,15 @@ let webpackConfProd = require('./config/webpack.prod.js');
 let webpackConfDev = require('./config/webpack.dev.js');
 
 //styles
+gulp.task('sass', function() {
+    return gulp.src('src/app/*.scss')
+        .pipe(sass())
+        .pipe(concat('app.css'))
+        //.pipe(rename({ suffix: '.min' }))
+        //.pipe(minifycss())
+        .pipe(gulp.dest('src/assets/css/'))
+        .pipe(notify({ message: 'Sass task complete' }));
+});
 gulp.task('less', function() {
     return gulp.src('src/app/*.less')
         .pipe(less())

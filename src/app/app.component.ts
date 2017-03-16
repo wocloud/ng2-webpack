@@ -22,7 +22,7 @@ import { MENU } from './app.menu';
             <sf-footer></sf-footer>
         </div>
     </div>
-  `,
+  `
 })
 
 export class AppComponent {

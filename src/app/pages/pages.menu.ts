@@ -7,6 +7,21 @@ export const PAGES_MENU = [
         }
     },
     {
+        path: 'resources-management',
+        data: {
+            title: 'Resources',
+            icon: 'fa-cubes',
+        },
+        children: [
+            {
+                path: 'vm',
+                data: {
+                    title: 'VM'
+                }
+            }
+        ]
+    },
+    {
         path: 'apps',
         data: {
             title: 'Apps',
@@ -37,7 +52,7 @@ export const PAGES_MENU = [
         path: 'charts',
         data: {
             title: 'Charts',
-            icon: 'fa-table',
+            icon: 'fa-life-ring',
         }
     },
     {

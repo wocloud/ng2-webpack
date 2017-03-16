@@ -1,0 +1,50 @@
+<div class="panel-default">
+    <sf-breadcrumb [items]="breadcrumbs"></sf-breadcrumb>
+    <div class="content-query">
+        <form role="form" class="form-inline">
+            <div class="form-group">
+                <label class="control-label">Area</label>
+                <input [(ngModel)]="search.area" name="area" type="text" class="form-control" placeholder="Area...">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Name</label>
+                <input [(ngModel)]="search.name" name="name" type="text" class="form-control" placeholder="Name...">
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="control-label">CreateDate</label>-->
+                <!--<datepicker [(ngModel)]="search.createDate" name="createDate" [minDate]="minDate" [showWeeks]="true" [dateDisabled]="dateDisabled"></datepicker>-->
+            <!--</div>-->
+            <div class="form-group">
+                <button class="btn btn-sm btn-primary" (click)="search($event)">Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="content-list">
+        <div class="tool-bar-group">
+            <button class="btn btn-sm btn-primary" (click)="create()">Create</button>
+            <button class="btn btn-sm btn-primary" (click)="edit($event)">Edit</button>
+            <button class="btn btn-sm btn-primary" (click)="destroy($event)">Destroy</button>
+        </div>
+        <sf-table [rows]="rows"
+                  [columns]="columns"
+                  [config]="config"
+                  (selectedRows)="onSelectedRows($event)"
+                  (tableChanged)="onChangeTable($event)"></sf-table>
+    </div>
+</div>
+
+<!-- create modal -->
+<template #createModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
+</template>
