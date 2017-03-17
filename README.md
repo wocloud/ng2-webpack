@@ -13,7 +13,12 @@ then, open your browser, and typing the following path:
 http://localhost:8000
 
 
-PS: ng2-bootstrap website: http://valor-software.com/ng2-bootstrap/
+PS:
+    1 \ ng2-bootstrap http://valor-software.com/ng2-bootstrap/
+    2 \ ng2-smart-table  https://github.com/akveo/ng2-smart-table
+    3 \ angular2-echarts
+    4 \ ng2-bs3-modal  http://npm.taobao.org/package/ng2-bs3-modal
+
 
 //0311
 1 \ 所有的views部分都在src/app/pages文件夹下, 文件夹下每个folder对应一个业务.

@@ -135,6 +135,19 @@ module.exports = function (options) {
                     })
                 },
 
+                {
+                    test: /\.scss$/,
+                    use: ['raw-loader', 'sass-loader']
+                },
+
+                {
+                    test: /initial\.scss$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: 'css-loader!sass-loader?sourceMap'
+                    })
+                },
+
                 /*
                  * to string and sass loader support for *.scss files (from Angular components)
                  * Returns compiled css content as string

@@ -109,7 +109,11 @@ export class SFTableComponent implements OnInit{
      * @returns {any}
      */
     public getData(row:any, propertyName:string):string {
-        return propertyName.split('.').reduce((prev:any, curr:string) => prev[curr], row);
+        let value = propertyName.split('.').reduce((prev:any, curr:string) => prev[curr], row);
+        if(value==undefined || value==null) {
+            value = '';
+        }
+        return value;
     }
 
     /**

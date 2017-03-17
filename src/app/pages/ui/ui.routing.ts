@@ -4,8 +4,8 @@
 import { Routes, RouterModule }  from '@angular/router';
 
 import {UIComponent} from "./ui.components";
-import {Buttons} from './components/buttons';
-import {Modals} from "./components/modals";
+import {Modals} from "./modals";
+import {Buttons} from "./buttons";
 
 const routes: Routes = [
     {

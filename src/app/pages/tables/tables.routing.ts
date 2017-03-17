@@ -4,11 +4,17 @@
 import { Routes, RouterModule }  from '@angular/router';
 
 import { TablesComponent } from './tables.component';
+import {BasicTableComponent} from "./basicTable/basicTable.component";
+import {SmartTableComponent} from "./smartTable/smartTable.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: TablesComponent
+        component: TablesComponent,
+        children: [
+            {path: 'basic-table', component: BasicTableComponent},
+            {path: 'smart-table', component: SmartTableComponent}
+        ]
     }
 ];
 

@@ -46,7 +46,20 @@ export const PAGES_MENU = [
         data: {
             title: 'Tables',
             icon: 'fa-table',
-        }
+        },
+        children: [
+            {
+                path: 'basic-table',
+                data: {
+                    title: 'Basic Table'
+                }
+            }, {
+                path: 'smart-table',
+                data: {
+                    title: 'Smart Table'
+                }
+            }
+        ]
     },
     {
         path: 'charts',

@@ -7,12 +7,12 @@ import { CarouselModule } from 'ng2-bootstrap/carousel';
 import { CollapseModule } from 'ng2-bootstrap/collapse';
 import { DatepickerModule } from 'ng2-bootstrap/datepicker';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
-import { ModalModule } from 'ng2-bootstrap/modal';
 import { PopoverModule } from 'ng2-bootstrap/popover';
 import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { TimepickerModule } from 'ng2-bootstrap/timepicker';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AngularEchartsModule } from 'angular2-echarts';
 
 import { ThemeConfig } from './theme.config';
@@ -53,17 +53,16 @@ const THEME_COMPONENTS = [
         CollapseModule.forRoot(),
         DropdownModule.forRoot(),
         DatepickerModule.forRoot(),
-        ModalModule.forRoot(),
         PopoverModule.forRoot(),
         ProgressbarModule.forRoot(),
         TabsModule.forRoot(),
         TimepickerModule.forRoot(),
-        TooltipModule.forRoot(),
-        AngularEchartsModule
+        TooltipModule.forRoot()
     ],
     exports: [
         ...THEME_COMPONENTS,
-        SFTableModule
+        SFTableModule,
+        Ng2SmartTableModule
     ]
 })
 export class ThemeModule {
